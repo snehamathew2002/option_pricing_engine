@@ -36,6 +36,14 @@ namespace options_pricing_engine {
             cout << "Binomial Put Price(50 steps): " << put(opt, 50) << endl;
             cout << "Binomial Put Price(100 steps): " << put(opt, 100) << endl;
             cout << "Binomial Put Price(500 steps): " << put(opt, 500) << endl;
+
+            cout << "-----------------------------------" << endl;
+
+            cout << "Running Monte Carlo models..." << endl;
+            cout << "Monte Carlo Call Price: " << call(opt, 10000) << endl;
+            cout << "Monte Carlo Put Price: " << put(opt, 10000) << endl;
+
+            cout << "-----------------------------------" << endl;
         }
     };
 }

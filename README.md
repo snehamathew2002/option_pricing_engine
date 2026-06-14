@@ -4,6 +4,7 @@ A C++ implementation of two widely used option pricing models in quantitative fi
 
 * **Black-Scholes Model** (closed-form analytical solution)
 * **Binomial Tree Model** (numerical pricing approach)
+* **Monte Carlo Simulation Model** (stochastic simulation pricing approach)
 
 The project prices European call and put options, compares analytical and numerical methods, and demonstrates convergence of the Binomial Tree model toward the Black-Scholes solution as the number of time steps increases.
 
@@ -17,6 +18,7 @@ options_pricing_engine/
 ├── models/
 │   ├── black_scholes.cpp
 │   ├── binomial.cpp
+│   ├── monte_carlo.cpp
 │
 ├── include/
 │   ├── option.hpp
@@ -43,6 +45,15 @@ options_pricing_engine/
 * Risk-neutral valuation
 * Backward induction algorithm
 * Configurable number of tree steps
+* Convergence analysis against Black-Scholes
+
+### Monte Carlo Simulation
+* European Call Option Pricing
+* European Put Option Pricing
+* Random stock price path generation
+* Stochastic simulation using normal distributions
+* Expected payoff estimation
+* Discounted cash flow valuation
 * Convergence analysis against Black-Scholes
 
 ---
@@ -110,6 +121,22 @@ The option is valued by:
 
 ---
 
+### Monte Carlo Pricing
+
+The Monte Carlo model estimates option prices by simulating thousands of possible future stock prices.
+
+The process consists of:
+
+1. Generating random market scenarios
+2. Simulating stock prices at option expiry
+3. Calculating option payoffs for each simulation
+4. Averaging all simulated payoffs
+5. Discounting the expected payoff back to the present
+
+Unlike Black-Scholes, which uses a closed-form formula, Monte Carlo uses statistical simulation to estimate fair value.
+
+--- 
+
 ## Example Output
 
 ```text
@@ -131,6 +158,12 @@ Binomial Put Price(10 steps): 0.0715795
 Binomial Put Price(50 steps): 0.0890214
 Binomial Put Price(100 steps): 0.0908499
 Binomial Put Price(500 steps): 0.0929831
+
+Running Monte Carlo models...
+
+Monte Carlo Call Price: 54.9701
+Monte Carlo Put Price: 0.0930782
+
 ```
 
 ---
@@ -146,6 +179,7 @@ Binomial Put Price(500 steps): 0.0929831
 | Binomial (50 Steps)  | 54.9661 |
 | Binomial (100 Steps) | 54.9679 |
 | Binomial (500 Steps) | 54.9700 |
+| Monte Carlo          | 54.9701 |
 
 ### Put Option
 
@@ -156,10 +190,11 @@ Binomial Put Price(500 steps): 0.0929831
 | Binomial (50 Steps)  | 0.0890 |
 | Binomial (100 Steps) | 0.0908 |
 | Binomial (500 Steps) | 0.0930 |
+| Monte Carlo          | 0.0931 |
 
 ### Observation
 
-As the number of binomial tree steps increases, the numerical solution converges toward the analytical Black-Scholes solution.
+As the number of binomial tree steps increases or Monte Carlo simulation count increases, the numerical solution converges toward the analytical Black-Scholes solution.
 
 This validates the implementation and demonstrates the relationship between discrete-time and continuous-time option pricing models.
 
@@ -189,6 +224,10 @@ The Binomial Tree model approximates stock price evolution through discrete step
 ### Risk-Neutral Valuation
 
 The project applies risk-neutral probabilities to price derivatives without requiring forecasts of actual market direction.
+
+### Stochastic Simulation
+
+Monte Carlo pricing demonstrates how random market scenarios can be used to estimate expected option payoffs and model uncertainty.
 
 ---
 
